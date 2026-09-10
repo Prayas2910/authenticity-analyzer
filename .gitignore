@@ -2,8 +2,5 @@ backend/ml/.venv
 backend/node_modules
 /home/prayas-sawwalakhe/Desktop/Programs/My Projects/Veriscan/Screenshot from 2026-08-10 12-58-30.png.venv/
 /vite.config.js
-/organisation_dataset_xgboost_ready.csv
-/organisation_dataset.csv
-backend/data/LinkedIn_Dataset_ML_Ready.csv
 /backend/data/demo_company_urls_10.csv
 /frontend/node_modules
