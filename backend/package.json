@@ -6,7 +6,8 @@
   "scripts": {
     "start": "node server.js",
     "dev": "node --watch server.js",
-    "train": "cd ml && python3 train_model.py"
+    "train": "cd ml && python3 train_model.py",
+    "train-company": "cd ml && python3 train_company_model.py"
   },
   "dependencies": {
     "cors": "^2.8.5",

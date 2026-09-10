@@ -2,7 +2,7 @@ const fs = require("fs");
 const path = require("path");
 const { parse } = require("csv-parse/sync");
 
-const CSV_PATH = path.join(__dirname, "..", "data", "company_urls_deduped.csv");
+const CSV_PATH = path.join(__dirname, "..", "..", "organisation_dataset.csv");
 let COMPANIES = null;
 
 function normalizeName(text) {
@@ -43,7 +43,8 @@ function loadCompanies() {
     return {
       companyName: name,
       url,
-      source: row.source || "unknown",
+      source: row.origin_source || row.source || "organisation_dataset.csv",
+      datasetLabel: row.label_name || null,
       normName: normalizeName(name),
       normUrl: normalizeUrl(url),
     };
