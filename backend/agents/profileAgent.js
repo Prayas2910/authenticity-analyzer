@@ -20,6 +20,7 @@ function runModel(features) {
     let stderr = "";
     py.stdout.on("data", (d) => (stdout += d.toString()));
     py.stderr.on("data", (d) => (stderr += d.toString()));
+    py.on("error", (err) => reject(err));
     py.on("close", (code) => {
       if (code !== 0) return reject(new Error(stderr || `predict.py exited ${code}`));
       try {
