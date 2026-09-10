@@ -2,7 +2,10 @@ const fs = require("fs");
 const path = require("path");
 const { parse } = require("csv-parse/sync");
 
-const CSV_PATH = path.join(__dirname, "..", "..", "organisation_dataset.csv");
+const CSV_PATHS = [
+  path.join(__dirname, "..", "data", "company_urls_deduped.csv"),
+  path.join(__dirname, "..", "..", "organisation_dataset.csv"),
+];
 let COMPANIES = null;
 
 function normalizeName(text) {
@@ -31,11 +34,12 @@ function normalizeUrl(rawUrl) {
 
 function loadCompanies() {
   if (COMPANIES) return COMPANIES;
-  if (!fs.existsSync(CSV_PATH)) {
-    throw new Error(`Company CSV not found at ${CSV_PATH}`);
+  const csvPath = CSV_PATHS.find((candidate) => fs.existsSync(candidate));
+  if (!csvPath) {
+    throw new Error(`Company CSV not found at any of: ${CSV_PATHS.join(", ")}`);
   }
 
-  const raw = fs.readFileSync(CSV_PATH, "utf-8");
+  const raw = fs.readFileSync(csvPath, "utf-8");
   const rows = parse(raw, { columns: true, skip_empty_lines: true });
   COMPANIES = rows.map((row) => {
     const name = row.company_name || row.companyName || "";

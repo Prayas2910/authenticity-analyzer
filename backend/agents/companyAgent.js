@@ -15,6 +15,7 @@ function runCompanyModel(company) {
 
     process.stdout.on("data", (data) => (stdout += data.toString()));
     process.stderr.on("data", (data) => (stderr += data.toString()));
+    process.on("error", (error) => reject(error));
     process.on("close", (code) => {
       if (code !== 0) return reject(new Error(stderr || `Company model exited ${code}`));
       try {
