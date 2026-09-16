@@ -21,8 +21,9 @@ export default function CompanyChecker() {
     setPrediction(null);
     setLoading(true);
     try {
+      // Send companyName explicitly to avoid re-lookup issues
       const res = await analyzeCompany({
-        name: selectedCompany.companyName,
+        companyName: selectedCompany.companyName,
         url: selectedCompany.url,
       });
       setCompany(res.company || selectedCompany);

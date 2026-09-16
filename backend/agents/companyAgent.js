@@ -25,11 +25,20 @@ function runCompanyModel(company) {
       }
     });
 
-    process.stdin.write(JSON.stringify({
+    const inputData = JSON.stringify({
       company_name: company.companyName,
       url: company.url,
-    }));
-    process.stdin.end();
+    });
+    
+    // Use write in a callback to ensure it succeeds
+    const writeResult = process.stdin.write(inputData);
+    if (writeResult) {
+      // Buffer was flushed, safe to end
+      process.stdin.end();
+    } else {
+      // Buffer not flushed, wait for drain event
+      process.stdin.on("drain", () => process.stdin.end());
+    }
   });
 }
 

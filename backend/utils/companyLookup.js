@@ -3,9 +3,15 @@ const path = require("path");
 const { parse } = require("csv-parse/sync");
 
 const CSV_PATHS = [
-  path.join(__dirname, "..", "data", "company_urls_deduped.csv"),
+  // Prioritise organisation_dataset.csv as it contains both legitimate and fraud companies
   path.join(__dirname, "..", "..", "organisation_dataset.csv"),
+  path.join(__dirname, "data", "company_urls_deduped.csv"),
+  path.join(__dirname, "data", "demo_company_urls_10.csv"),
 ];
+
+// Clear cache on load
+delete require.cache[require.resolve("./companyLookup")];
+
 let COMPANIES = null;
 
 function normalizeName(text) {
@@ -13,7 +19,7 @@ function normalizeName(text) {
   return text
     .trim()
     .toLowerCase()
-    .replace(/[‘’“”"'`·••–—_–,.;:()\[\]{}\/\\]/g, " ")
+    .replace(/[''""'`·••–—_–,.;:()[\]{}/\\]/g, " ")
     .replace(/\s+/g, " ")
     .trim();
 }
@@ -69,16 +75,22 @@ function searchCompaniesByName(query, limit = 20) {
   const tokens = normalized.split(" ").filter(Boolean);
   const companies = loadCompanies();
 
-  const exact = companies.filter((company) => company.normName === normalized);
+  // Normalize the query for comparison
+  const queryNorm = normalized;
+
+  // Direct exact match on normalized name
+  const exact = companies.filter((company) => company.normName === queryNorm);
   if (exact.length > 0) {
     return exact.slice(0, limit);
   }
 
-  const contains = companies.filter((company) => company.normName.includes(normalized));
+  // Check if query is contained in company name
+  const contains = companies.filter((company) => company.normName.includes(queryNorm));
   if (contains.length > 0) {
     return contains.slice(0, limit);
   }
 
+  // Token-based matching
   const tokenMatches = companies
     .map((company) => {
       const score = tokens.reduce((sum, token) => {

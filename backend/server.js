@@ -116,11 +116,35 @@ app.post("/api/company/check", (req, res) => {
 
 app.post("/api/company/analyze", async (req, res) => {
   try {
-    const { url, name } = req.body || {};
-    let company = url ? findCompanyByUrl(url) : null;
-    if (!company && name && name.trim()) {
-      company = searchCompaniesByName(name, 1)[0] || null;
+    const { url, companyName } = req.body || {};
+
+    // If we have companyName from frontend, use searchCompaniesByName to get the exact match
+    let company = null;
+
+    if (companyName && companyName.trim()) {
+      // Search for the company by name
+      const results = searchCompaniesByName(companyName, 5);
+      if (results.length > 0) {
+        // Find exact match in results
+        const targetNorm = results[0].normName; // Use first result's normName
+        company = results.find(c => c.normName === targetNorm) || results[0];
+      }
+
+      // If not found, create a minimal company object with what we have
+      if (!company) {
+        company = {
+          companyName: companyName,
+          url: url || "",
+          source: "frontend",
+          datasetLabel: null,
+          normName: companyName.toLowerCase().trim(),
+          normUrl: null,
+        };
+      }
+    } else if (url) {
+      company = findCompanyByUrl(url);
     }
+
     if (!company) return res.status(404).json({ error: "Company not found in organisation_dataset.csv" });
 
     const prediction = await runCompanyModel(company);
