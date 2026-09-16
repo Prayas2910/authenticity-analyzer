@@ -30,6 +30,10 @@ def main():
             "fake_probability": round(probability, 4),
             "predicted_label": predicted_label,
             "predicted_class": "suspicious" if predicted_label else "legitimate",
+            "feature_values": {
+                name: round(float(feature_values[name]), 4)
+                for name in bundle["features"]
+            },
             "top_features": top_features,
             "model": "XGBoost",
             "source_dataset": bundle["source_dataset"],

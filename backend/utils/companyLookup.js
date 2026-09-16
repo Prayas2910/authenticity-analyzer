@@ -4,7 +4,7 @@ const { parse } = require("csv-parse/sync");
 
 const CSV_PATHS = [
   // Prioritise organisation_dataset.csv as it contains both legitimate and fraud companies
-  path.join(__dirname, "..", "..", "organisation_dataset.csv"),
+  path.join(__dirname, "..", "data", "organisation_dataset.csv"),
   path.join(__dirname, "data", "company_urls_deduped.csv"),
   path.join(__dirname, "data", "demo_company_urls_10.csv"),
 ];

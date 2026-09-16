@@ -66,7 +66,7 @@ export default function CompanyChecker() {
       if (res.company) await runAnalysis(res.company);
     } catch (err) {
       setError(err.message.includes("404")
-        ? "That LinkedIn URL is not in organisation_dataset.csv. Try a company returned by name search."
+        ? "That LinkedIn URL is not in backend/data/organisation_dataset.csv. Try a company returned by name search."
         : err.message);
     } finally {
       setLoading(false);
@@ -182,7 +182,16 @@ export default function CompanyChecker() {
             <span>Test AUC <strong>{prediction.metrics.test_auc.toFixed(3)}</strong></span>
           </div>
           <div className="prediction-features">
-            <div className="prediction-label">Top model features</div>
+            <div className="prediction-label">This company&apos;s input features</div>
+            {Object.entries(prediction.feature_values || {}).map(([feature, value]) => (
+              <div className="prediction-feature" key={feature}>
+                <span>{feature.replaceAll("_", " ")}</span>
+                <strong>{value}</strong>
+              </div>
+            ))}
+          </div>
+          <div className="prediction-features">
+            <div className="prediction-label">Global model feature importance</div>
             {prediction.top_features.map((item) => (
               <div className="prediction-feature" key={item.feature}>
                 <span>{item.feature.replaceAll("_", " ")}</span>

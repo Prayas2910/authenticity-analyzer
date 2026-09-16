@@ -1,4 +1,4 @@
-"""Train the company authenticity XGBoost model from organisation_dataset.csv."""
+"""Train the company authenticity XGBoost model from precomputed features."""
 
 import json
 from pathlib import Path
@@ -8,25 +8,21 @@ import pandas as pd
 from sklearn.metrics import accuracy_score, classification_report, roc_auc_score
 from xgboost import XGBClassifier
 
-from company_features import FEATURES, extract_features
+from company_features import FEATURES
 
 
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
-DATA_PATH = PROJECT_ROOT / "organisation_dataset.csv"
+DATA_PATH = PROJECT_ROOT / "backend" / "data" / "organisation_dataset_xgboost_ready.csv"
 MODEL_OUT = Path(__file__).resolve().parent / "company_model.joblib"
-
-
-def build_features(df):
-    values = [extract_features(row.company_name, row.url) for row in df.itertuples()]
-    return pd.DataFrame(values, columns=FEATURES)
-
 
 def main():
     df = pd.read_csv(DATA_PATH, encoding="utf-8-sig")
-    if "label" not in df or "split" not in df:
-        raise SystemExit("organisation_dataset.csv must contain label and split columns")
+    required_columns = [*FEATURES, "label", "split"]
+    missing_columns = [column for column in required_columns if column not in df]
+    if missing_columns:
+        raise SystemExit(f"Missing columns in {DATA_PATH.name}: {', '.join(missing_columns)}")
 
-    X = build_features(df)
+    X = df[FEATURES].apply(pd.to_numeric, errors="raise")
     y = df["label"].astype(int)
     train_mask = df["split"].eq("train")
     val_mask = df["split"].eq("val")

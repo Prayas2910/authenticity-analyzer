@@ -145,7 +145,7 @@ app.post("/api/company/analyze", async (req, res) => {
       company = findCompanyByUrl(url);
     }
 
-    if (!company) return res.status(404).json({ error: "Company not found in organisation_dataset.csv" });
+    if (!company) return res.status(404).json({ error: "Company not found in backend/data/organisation_dataset.csv" });
 
     const prediction = await runCompanyModel(company);
     res.json({ company, prediction });
