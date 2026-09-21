@@ -53,6 +53,7 @@ body {
     radial-gradient(circle at top left, rgba(10, 102, 194, 0.08), transparent 32%),
     radial-gradient(circle at right top, rgba(95, 123, 153, 0.08), transparent 28%),
     linear-gradient(135deg, var(--bg) 0%, var(--bg-2) 100%);
+  -webkit-tap-highlight-color: transparent;
 }
 
 body::before {
@@ -350,6 +351,8 @@ button {
   text-align: left;
   cursor: pointer;
   transition: border-color 0.16s ease, box-shadow 0.16s ease, background 0.16s ease;
+  min-height: 48px;
+  -webkit-tap-highlight-color: rgba(10, 102, 194, 0.15);
 }
 
 .section-nav button:hover,
@@ -525,6 +528,8 @@ button {
   font-weight: 600;
   cursor: pointer;
   transition: background 0.15s ease, color 0.15s ease;
+  min-height: 40px;
+  -webkit-tap-highlight-color: rgba(10, 102, 194, 0.15);
 }
 
 .company-action:hover {
@@ -703,6 +708,8 @@ button {
   font-family: var(--font-mono);
   cursor: pointer;
   transition: all 0.18s ease;
+  min-height: 40px;
+  -webkit-tap-highlight-color: rgba(10, 102, 194, 0.15);
 }
 
 .tab.active {
@@ -740,12 +747,25 @@ button {
   font-size: 14px;
   outline: none;
   transition: border-color 0.16s ease, box-shadow 0.16s ease;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-appearance: none;
+  appearance: none;
 }
 
 .field input:focus,
 .field textarea:focus {
   border-color: var(--accent);
   box-shadow: 0 0 0 3px rgba(114, 182, 255, 0.12);
+}
+
+.field input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+.field input[type="number"]::-webkit-inner-spin-button,
+.field input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
 
 .field textarea {
@@ -789,6 +809,8 @@ button {
   cursor: pointer;
   transition: transform 0.14s ease, box-shadow 0.14s ease, opacity 0.14s ease;
   box-shadow: 0 5px 12px rgba(10, 102, 194, 0.18);
+  min-height: 44px;
+  -webkit-tap-highlight-color: rgba(10, 102, 194, 0.2);
 }
 
 .btn-primary:hover {
@@ -817,6 +839,8 @@ button {
   font-family: var(--font-mono);
   cursor: pointer;
   transition: border-color 0.15s ease, color 0.15s ease, background 0.15s ease;
+  min-height: 40px;
+  -webkit-tap-highlight-color: rgba(10, 102, 194, 0.1);
 }
 
 .btn-ghost:hover {
@@ -833,6 +857,7 @@ button {
   max-height: 220px;
   overflow-y: auto;
   background: rgba(255, 255, 255, 0.025);
+  -webkit-overflow-scrolling: touch;
 }
 
 .search-result-item {
@@ -840,6 +865,8 @@ button {
   border-bottom: 1px solid var(--border);
   cursor: pointer;
   transition: background 0.14s ease, transform 0.14s ease;
+  min-height: 48px;
+  -webkit-tap-highlight-color: rgba(10, 102, 194, 0.1);
 }
 
 .search-result-item:last-child {
@@ -898,13 +925,519 @@ button {
   justify-content: center;
 }
 
-@media (max-width: 900px) {
+@media (max-width: 1024px) {
+  .company-workspace {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 1024px) {
+  .main {
+    max-width: 100%;
+    padding: 28px 24px 64px;
+  }
+
   .hero {
     grid-template-columns: 1fr;
+    gap: 16px;
   }
 
   .workspace {
     grid-template-columns: 1fr;
+  }
+
+  .results-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .topbar {
+    padding: 16px 20px;
+  }
+
+  .brand-mark {
+    width: 110px;
+    height: 26px;
+  }
+
+  .brand-name {
+    font-size: 15px;
+  }
+
+  .brand-tag {
+    display: none;
+  }
+
+  .status-pill {
+    font-size: 10px;
+    padding: 6px 10px;
+  }
+
+  .main {
+    padding: 24px 20px 56px;
+  }
+
+  .hero-copy {
+    padding: 20px;
+  }
+
+  .hero h1 {
+    font-size: 30px;
+  }
+
+  .hero p {
+    font-size: 14px;
+  }
+
+  .hero-side-card {
+    padding: 18px;
+  }
+
+  .hero-side-card h2 {
+    font-size: 18px;
+  }
+
+  .section-nav {
+    gap: 10px;
+  }
+
+  .section-nav button {
+    padding: 13px 15px;
+  }
+
+  .section-nav strong {
+    font-size: 13px;
+  }
+
+  .section-nav small {
+    font-size: 11px;
+  }
+
+  .field-row {
+    grid-template-columns: 1fr;
+  }
+
+  .agents-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .pipeline {
+    padding: 18px 16px;
+  }
+
+  .pipe-node {
+    min-width: 80px;
+  }
+
+  .pipe-dot {
+    width: 38px;
+    height: 38px;
+    font-size: 13px;
+  }
+
+  .pipe-label {
+    font-size: 9px;
+  }
+}
+
+@media (max-width: 640px) {
+  .topbar {
+    padding: 14px 16px;
+  }
+
+  .brand-mark {
+    width: 95px;
+    height: 22px;
+  }
+
+  .brand-name {
+    font-size: 14px;
+  }
+
+  .main {
+    padding: 20px 16px 48px;
+  }
+
+  .hero-copy {
+    padding: 18px 16px;
+    border-radius: 16px;
+  }
+
+  .hero h1 {
+    font-size: 26px;
+    line-height: 1.12;
+  }
+
+  .hero p {
+    font-size: 13px;
+  }
+
+  .hero-highlights {
+    gap: 8px;
+  }
+
+  .hero-chip {
+    font-size: 11px;
+    padding: 6px 10px;
+  }
+
+  .hero-side-card {
+    padding: 16px;
+    border-radius: 16px;
+  }
+
+  .hero-side-card h2 {
+    font-size: 16px;
+  }
+
+  .hero-side-card p {
+    font-size: 12px;
+  }
+
+  .hero-list li {
+    font-size: 12px;
+  }
+
+  .section-nav {
+    grid-template-columns: 1fr;
+  }
+
+  .section-nav button {
+    padding: 12px 14px;
+  }
+
+  .section-nav-icon {
+    flex: 0 0 28px;
+    width: 28px;
+    height: 28px;
+    font-size: 12px;
+  }
+
+  .panel {
+    padding: 16px;
+    border-radius: 16px;
+  }
+
+  .panel-title {
+    font-size: 15px;
+  }
+
+  .panel-sub {
+    font-size: 12px;
+  }
+
+  .field input,
+  .field textarea {
+    padding: 10px 12px;
+    font-size: 13px;
+  }
+
+  .btn-primary {
+    padding: 12px 14px;
+    font-size: 13px;
+  }
+
+  .btn-ghost {
+    padding: 9px 12px;
+    font-size: 11px;
+  }
+
+  .pipeline {
+    padding: 16px 12px;
+    border-radius: 16px;
+  }
+
+  .pipeline-track {
+    min-width: 600px;
+  }
+
+  .pipe-node {
+    min-width: 70px;
+  }
+
+  .pipe-dot {
+    width: 34px;
+    height: 34px;
+    font-size: 12px;
+  }
+
+  .pipe-label {
+    font-size: 8px;
+  }
+
+  .pipe-connector {
+    min-width: 18px;
+  }
+
+  .gauge-wrap {
+    width: 160px;
+    height: 160px;
+  }
+
+  .gauge-score .num {
+    font-size: 32px;
+  }
+
+  .gauge-score .pct {
+    font-size: 13px;
+  }
+
+  .risk-badge {
+    font-size: 11px;
+    padding: 5px 14px;
+  }
+
+  .profile-meta .row {
+    font-size: 11px;
+  }
+
+  .empty-state {
+    padding: 40px 16px;
+    border-radius: 16px;
+  }
+
+  .empty-state .glyph {
+    font-size: 28px;
+  }
+
+  .empty-state p {
+    font-size: 13px;
+  }
+
+  .company-result,
+  .company-results-list {
+    padding: 16px;
+  }
+
+  .company-row {
+    padding: 12px 14px;
+  }
+
+  .company-prediction {
+    padding: 18px;
+    border-radius: 16px;
+  }
+
+  .prediction-header h3 {
+    font-size: 18px;
+  }
+
+  .prediction-score {
+    font-size: 26px;
+  }
+
+  .prediction-copy {
+    font-size: 12px;
+  }
+
+  .prediction-meta {
+    font-size: 10px;
+  }
+
+  .prediction-feature {
+    font-size: 11px;
+  }
+
+  .tabs {
+    padding: 3px;
+  }
+
+  .tab {
+    padding: 8px 10px;
+    font-size: 11px;
+  }
+
+  .search-results {
+    max-height: 200px;
+  }
+
+  .search-result-item {
+    padding: 10px 12px;
+  }
+
+  .search-result-item .name {
+    font-size: 12px;
+  }
+
+  .search-result-item .meta {
+    font-size: 10px;
+  }
+
+  .error-box {
+    font-size: 12px;
+    padding: 10px 12px;
+  }
+
+  .hint-box {
+    font-size: 11px;
+    padding: 8px 10px;
+  }
+
+  .agent-card {
+    padding: 14px;
+  }
+
+  .agent-card .agent-name {
+    font-size: 12px;
+  }
+
+  .agent-card .agent-body {
+    font-size: 11px;
+  }
+
+  .explain-item {
+    padding: 10px 12px;
+  }
+
+  .explain-item .label {
+    font-size: 12px;
+  }
+
+  .explain-item .detail {
+    font-size: 11px;
+  }
+
+  .footer-note {
+    font-size: 10.5px;
+  }
+}
+
+@media (max-width: 480px) {
+  .topbar {
+    padding: 12px 14px;
+  }
+
+  .brand-mark {
+    width: 80px;
+    height: 20px;
+  }
+
+  .brand-name {
+    display: none;
+  }
+
+  .status-pill {
+    padding: 5px 8px;
+    font-size: 9px;
+  }
+
+  .status-dot {
+    width: 6px;
+    height: 6px;
+  }
+
+  .main {
+    padding: 16px 14px 40px;
+  }
+
+  .hero-copy {
+    padding: 16px 14px;
+  }
+
+  .hero h1 {
+    font-size: 22px;
+  }
+
+  .hero p {
+    font-size: 12px;
+  }
+
+  .hero-highlights {
+    gap: 6px;
+  }
+
+  .hero-chip {
+    font-size: 10px;
+    padding: 5px 8px;
+  }
+
+  .hero-side-card {
+    padding: 14px;
+  }
+
+  .hero-side-card h2 {
+    font-size: 15px;
+  }
+
+  .hero-list li {
+    font-size: 11px;
+    line-height: 1.5;
+  }
+
+  .section-nav button {
+    padding: 10px 12px;
+  }
+
+  .section-nav strong {
+    font-size: 12px;
+  }
+
+  .section-nav small {
+    font-size: 10px;
+  }
+
+  .panel {
+    padding: 14px;
+  }
+
+  .field input,
+  .field textarea {
+    padding: 9px 11px;
+    font-size: 12px;
+  }
+
+  .btn-primary {
+    padding: 11px 13px;
+    font-size: 12px;
+  }
+
+  .pipeline-track {
+    min-width: 520px;
+  }
+
+  .pipe-node {
+    min-width: 60px;
+  }
+
+  .pipe-dot {
+    width: 32px;
+    height: 32px;
+    font-size: 11px;
+  }
+
+  .pipe-label {
+    font-size: 7px;
+  }
+
+  .gauge-wrap {
+    width: 140px;
+    height: 140px;
+  }
+
+  .gauge-score .num {
+    font-size: 28px;
+  }
+
+  .gauge-score .pct {
+    font-size: 12px;
+  }
+
+  .profile-meta .row {
+    font-size: 10px;
+    padding: 5px 0;
+  }
+
+  .empty-state {
+    padding: 32px 14px;
+  }
+
+  .empty-state .glyph {
+    font-size: 24px;
+  }
+
+  .empty-state p {
+    font-size: 12px;
   }
 }
 
@@ -915,6 +1448,9 @@ button {
   padding: 22px 20px;
   margin-bottom: 22px;
   overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  scroll-snap-type: x mandatory;
   box-shadow: 0 10px 26px rgba(23, 43, 77, 0.07);
 }
 
@@ -1005,6 +1541,7 @@ button {
   min-width: 24px;
   margin: 0 -2px;
   top: -14px;
+  -webkit-overflow-scrolling: touch;
 }
 
 .pipe-connector.active {
@@ -1041,12 +1578,6 @@ button {
   grid-template-columns: 300px 1fr;
   gap: 24px;
   margin-top: 22px;
-}
-
-@media (max-width: 900px) {
-  .results-grid {
-    grid-template-columns: 1fr;
-  }
 }
 
 .gauge-card {
@@ -1172,12 +1703,6 @@ button {
   gap: 14px;
 }
 
-@media (max-width: 640px) {
-  .agents-grid {
-    grid-template-columns: 1fr;
-  }
-}
-
 .agent-card {
   border: 1px solid var(--border);
   border-radius: 16px;
@@ -1296,28 +1821,4 @@ button {
   font-family: var(--font-mono);
 }
 
-@media (max-width: 640px) {
-  .topbar {
-    padding: 14px 16px;
-  }
 
-  .brand-tag {
-    display: none;
-  }
-
-  .main {
-    padding: 22px 16px 48px;
-  }
-
-  .hero h1 {
-    font-size: 28px;
-  }
-
-  .section-nav {
-    grid-template-columns: 1fr;
-  }
-
-  .section-nav button {
-    padding: 12px 14px;
-  }
-}
