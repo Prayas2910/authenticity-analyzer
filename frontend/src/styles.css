@@ -402,7 +402,7 @@ button {
   font-family: var(--font-display);
   font-size: 16px;
   font-weight: 600;
-  margin: 0 0 6px;
+  margin: 0 0 8px;
   display: flex;
   align-items: center;
   gap: 8px;
@@ -412,7 +412,7 @@ button {
 .panel-sub {
   font-size: 13px;
   color: var(--text-faint);
-  margin: 0 0 18px;
+  margin: 0 0 20px;
   line-height: 1.6;
 }
 
@@ -698,7 +698,7 @@ button {
   border: 1px solid var(--border);
   border-radius: 999px;
   padding: 4px;
-  margin-bottom: 16px;
+  margin-bottom: 20px;
 }
 
 .tab {
@@ -728,7 +728,7 @@ button {
 }
 
 .field {
-  margin-bottom: 14px;
+  margin-bottom: 16px;
 }
 
 .field label {
@@ -855,6 +855,7 @@ button {
 
 .search-results {
   margin-top: 12px;
+  margin-bottom: 16px;
   border: 1px solid var(--border);
   border-radius: 14px;
   overflow: hidden;
@@ -1139,16 +1140,22 @@ button {
 
   .panel-title {
     font-size: 15px;
+    margin-bottom: 8px;
   }
 
   .panel-sub {
     font-size: 12px;
+    margin-bottom: 16px;
   }
 
   .field input,
   .field textarea {
     padding: 10px 12px;
     font-size: 13px;
+  }
+
+  .field {
+    margin-bottom: 14px;
   }
 
   .btn-primary {
@@ -1266,6 +1273,7 @@ button {
 
   .tabs {
     padding: 3px;
+    margin-bottom: 16px;
   }
 
   .tab {
@@ -1428,6 +1436,10 @@ button {
   .field textarea {
     padding: 9px 11px;
     font-size: 12px;
+  }
+
+  .field {
+    margin-bottom: 12px;
   }
 
   .btn-primary {

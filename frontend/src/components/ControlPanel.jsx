@@ -121,11 +121,9 @@ export default function ControlPanel({ onAnalyze, loading }) {
             </div>
           )}
 
-          <div style={{ marginTop: 14 }}>
-            <button className="btn-ghost" type="button" onClick={pickRandom} disabled={loading}>
-              ⟳ Review a random profile
-            </button>
-          </div>
+          <button className="btn-ghost" type="button" onClick={pickRandom} disabled={loading}>
+            ⟳ Review a random profile
+          </button>
         </>
       )}
 
