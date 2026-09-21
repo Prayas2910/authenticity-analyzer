@@ -46,6 +46,7 @@ body {
   color: var(--text);
   font-family: var(--font-body);
   -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
 }
 
 body {
@@ -88,6 +89,7 @@ button {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  overflow-x: hidden;
 }
 
 .topbar {
@@ -176,6 +178,7 @@ button {
   width: 100%;
   margin: 0 auto;
   padding: 32px 28px 72px;
+  overflow-x: hidden;
 }
 
 .hero {
@@ -492,7 +495,8 @@ button {
 .company-row a,
 .company-result a {
   color: var(--accent);
-  word-break: break-all;
+  word-break: break-word;
+  overflow-wrap: break-word;
 }
 
 .company-result strong {
@@ -888,6 +892,8 @@ button {
   font-size: 11px;
   color: var(--text-faint);
   font-family: var(--font-mono);
+  word-break: break-word;
+  overflow-wrap: break-word;
 }
 
 .error-box {
@@ -918,6 +924,7 @@ button {
   grid-template-columns: 360px 1fr;
   gap: 24px;
   align-items: start;
+  overflow-x: hidden;
 }
 
 .company-workspace {
@@ -928,6 +935,10 @@ button {
 @media (max-width: 1024px) {
   .company-workspace {
     grid-template-columns: 1fr;
+  }
+
+  .workspace {
+    overflow-x: hidden;
   }
 }
 
@@ -1057,6 +1068,11 @@ button {
 
   .main {
     padding: 20px 16px 48px;
+    overflow-x: hidden;
+  }
+
+  .hero {
+    gap: 12px;
   }
 
   .hero-copy {
@@ -1101,6 +1117,7 @@ button {
 
   .section-nav {
     grid-template-columns: 1fr;
+    gap: 8px;
   }
 
   .section-nav button {
@@ -1117,6 +1134,7 @@ button {
   .panel {
     padding: 16px;
     border-radius: 16px;
+    overflow: hidden;
   }
 
   .panel-title {
@@ -1146,6 +1164,8 @@ button {
   .pipeline {
     padding: 16px 12px;
     border-radius: 16px;
+    overflow-x: auto;
+    overflow-y: hidden;
   }
 
   .pipeline-track {
@@ -1190,6 +1210,11 @@ button {
 
   .profile-meta .row {
     font-size: 11px;
+  }
+
+  .profile-meta .row span:last-child {
+    max-width: 120px;
+    word-break: break-word;
   }
 
   .empty-state {
@@ -1301,6 +1326,14 @@ button {
   .footer-note {
     font-size: 10.5px;
   }
+
+  .agent-card .kv span:last-child {
+    word-break: break-word;
+  }
+
+  .explain-item .detail {
+    word-break: break-word;
+  }
 }
 
 @media (max-width: 480px) {
@@ -1329,6 +1362,11 @@ button {
 
   .main {
     padding: 16px 14px 40px;
+    overflow-x: hidden;
+  }
+
+  .hero {
+    gap: 10px;
   }
 
   .hero-copy {
@@ -1365,6 +1403,10 @@ button {
     line-height: 1.5;
   }
 
+  .section-nav {
+    gap: 6px;
+  }
+
   .section-nav button {
     padding: 10px 12px;
   }
@@ -1379,6 +1421,7 @@ button {
 
   .panel {
     padding: 14px;
+    overflow: hidden;
   }
 
   .field input,
@@ -1390,6 +1433,10 @@ button {
   .btn-primary {
     padding: 11px 13px;
     font-size: 12px;
+  }
+
+  .pipeline {
+    padding: 14px 10px;
   }
 
   .pipeline-track {
@@ -1428,6 +1475,11 @@ button {
     padding: 5px 0;
   }
 
+  .profile-meta .row span:last-child {
+    max-width: 100px;
+    word-break: break-word;
+  }
+
   .empty-state {
     padding: 32px 14px;
   }
@@ -1438,6 +1490,14 @@ button {
 
   .empty-state p {
     font-size: 12px;
+  }
+
+  .agent-card .kv span:last-child {
+    word-break: break-word;
+  }
+
+  .explain-item .detail {
+    word-break: break-word;
   }
 }
 
@@ -1578,6 +1638,7 @@ button {
   grid-template-columns: 300px 1fr;
   gap: 24px;
   margin-top: 22px;
+  overflow-x: hidden;
 }
 
 .gauge-card {
@@ -1649,18 +1710,22 @@ button {
   color: var(--text-dim);
   text-align: right;
   max-width: 150px;
+  word-break: break-word;
+  overflow-wrap: break-word;
 }
 
 .right-col {
   display: flex;
   flex-direction: column;
   gap: 20px;
+  overflow-x: hidden;
 }
 
 .explain-list {
   display: flex;
   flex-direction: column;
   gap: 10px;
+  overflow-x: hidden;
 }
 
 .explain-item {
@@ -1695,12 +1760,15 @@ button {
   font-size: 12px;
   color: var(--text-faint);
   line-height: 1.55;
+  word-break: break-word;
+  overflow-wrap: break-word;
 }
 
 .agents-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 14px;
+  overflow-x: hidden;
 }
 
 .agent-card {
