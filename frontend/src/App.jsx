@@ -82,38 +82,38 @@ export default function App() {
       <main className="main">
         <div className="hero">
           <div className="hero-copy">
-            <div className="eyebrow">A clearer way to check online identity</div>
-            <h1>Look twice before you trust what you see.</h1>
+            <div className="eyebrow">A practical check for professional identities</div>
+            <h1>A little due diligence goes a long way.</h1>
             <p>
-              Veriscan helps you review people and companies using the details that are actually visible, with a result you can understand and act on.
+              Take a closer look at a profile or company before you reach out. We’ll show you what we found and what may deserve a second look.
             </p>
             <div className="hero-highlights">
-              <span className="hero-chip">Profile signals</span>
-              <span className="hero-chip">Company checks</span>
-              <span className="hero-chip">Plain-language findings</span>
+              <span className="hero-chip">Profile details</span>
+              <span className="hero-chip">Company records</span>
+              <span className="hero-chip">Clear findings</span>
             </div>
           </div>
 
           <div className="hero-side-card">
-            <div className="card-kicker">Built for a quick second opinion</div>
-            <h2>Evidence first.</h2>
-            <p>Choose one thing to review, see what stands out, and keep the decision in your hands.</p>
+            <div className="card-kicker">A note on how this works</div>
+            <h2>Context, not a verdict.</h2>
+            <p>Online details can be incomplete. Treat a result as a starting point for your own checks.</p>
             <ul className="hero-list">
-              <li><strong>Search.</strong> Start with a profile or company already in the dataset.</li>
-              <li><strong>Review.</strong> See the checks that shaped the result.</li>
-              <li><strong>Decide.</strong> Use the evidence as context, not a verdict.</li>
+              <li><strong>Look up.</strong> Find a person or company in the available records.</li>
+              <li><strong>Read through.</strong> See which details shaped the result.</li>
+              <li><strong>Use your judgment.</strong> Verify anything important independently.</li>
             </ul>
           </div>
         </div>
 
         <nav className="section-nav" aria-label="Analysis sections">
-          <button className={section === "profile" ? "active" : ""} onClick={() => setSection("profile")} type="button">
+          <button className={section === "profile" ? "active" : ""} aria-pressed={section === "profile"} onClick={() => setSection("profile")} type="button">
             <span className="section-nav-icon">P</span>
-            <span><strong>Profile review</strong><small>People and authenticity signals</small></span>
+            <span><strong>People</strong><small>Review a professional profile</small></span>
           </button>
-          <button className={section === "company" ? "active" : ""} onClick={() => setSection("company")} type="button">
+          <button className={section === "company" ? "active" : ""} aria-pressed={section === "company"} onClick={() => setSection("company")} type="button">
             <span className="section-nav-icon">C</span>
-            <span><strong>Company check</strong><small>Organizations and risk signals</small></span>
+            <span><strong>Companies</strong><small>Check an organization</small></span>
           </button>
         </nav>
 
@@ -154,6 +154,11 @@ export default function App() {
         {section === "company" && <div className="workspace single-column company-workspace">
           <CompanyChecker />
         </div>}
+
+        <footer className="app-footer">
+          <span>SpammedIn</span>
+          <span>Independent checks are always worthwhile.</span>
+        </footer>
       </main>
     </div>
   );

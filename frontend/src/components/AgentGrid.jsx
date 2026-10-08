@@ -20,6 +20,10 @@ function Tag({ children, tone }) {
   );
 }
 
+function formatBoolean(value) {
+  return value === true ? "Yes" : value === false ? "No" : "—";
+}
+
 export default function AgentGrid({ agents }) {
   const { profileAgent, organizationAgent, imageAgent, behaviourAgent } = agents;
 
@@ -39,7 +43,9 @@ export default function AgentGrid({ agents }) {
           </div>
           <div className="kv">
             <span>Predicted class</span>
-            <span>{profileAgent?.modelResult?.predicted_class ?? "—"}</span>
+            <span>{profileAgent?.modelResult?.predicted_class
+              ? profileAgent.modelResult.predicted_class[0].toUpperCase() + profileAgent.modelResult.predicted_class.slice(1)
+              : "—"}</span>
           </div>
           <div className="kv">
             <span>GPT-text heuristic</span>
@@ -73,15 +79,15 @@ export default function AgentGrid({ agents }) {
               </div>
               <div className="kv">
                 <span>DNS resolves</span>
-                <span>{String(organizationAgent?.dns?.resolved)}</span>
+                <span>{formatBoolean(organizationAgent?.dns?.resolved)}</span>
               </div>
               <div className="kv">
                 <span>SSL valid</span>
-                <span>{String(organizationAgent?.ssl?.valid)}</span>
+                <span>{formatBoolean(organizationAgent?.ssl?.valid)}</span>
               </div>
               <div className="kv">
                 <span>WHOIS found</span>
-                <span>{String(organizationAgent?.whois?.found)}</span>
+                <span>{formatBoolean(organizationAgent?.whois?.found)}</span>
               </div>
               <div className="note">
                 Domain {organizationAgent?.domainWasGuessed ? "guessed from workplace text" : "provided explicitly"} —
@@ -102,11 +108,11 @@ export default function AgentGrid({ agents }) {
         <div className="agent-body">
           <div className="kv">
             <span>Has photo</span>
-            <span>{String(imageAgent?.hasPhotoFlag)}</span>
+            <span>{formatBoolean(imageAgent?.hasPhotoFlag)}</span>
           </div>
           <div className="kv">
             <span>Image analyzed</span>
-            <span>{String(imageAgent?.imageAnalyzed)}</span>
+            <span>{formatBoolean(imageAgent?.imageAnalyzed)}</span>
           </div>
           <div className="note">
             {imageAgent?.deepFace?.note || "DeepFace/CLIP require a separate model microservice — see agents/imageAgent.js."}
@@ -124,7 +130,7 @@ export default function AgentGrid({ agents }) {
         <div className="agent-body">
           <div className="kv">
             <span>Pasting pattern</span>
-            <span>{String(behaviourAgent?.pastingPatternDetected)}</span>
+            <span>{formatBoolean(behaviourAgent?.pastingPatternDetected)}</span>
           </div>
           <div className="kv">
             <span>Duplicate matches</span>
@@ -136,7 +142,7 @@ export default function AgentGrid({ agents }) {
           </div>
           <div className="kv">
             <span>Engagement gap</span>
-            <span>{String(behaviourAgent?.suspiciousEngagementGap)}</span>
+            <span>{formatBoolean(behaviourAgent?.suspiciousEngagementGap)}</span>
           </div>
           <div className="note">
             Cross-checks About text against every other profile in the dataset for copy-paste duplication.

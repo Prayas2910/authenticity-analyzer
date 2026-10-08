@@ -14,43 +14,42 @@ export default function RiskCard({ profile, riskAssessment }) {
 
   return (
     <div className="panel gauge-card">
-      <div className="panel-title" style={{ justifyContent: "center" }}>
-        Risk Assessment
-      </div>
+      <div className="panel-title">Risk assessment</div>
       <RiskGauge percent={riskAssessment?.riskPercent ?? 0} level={level} color={riskAssessment?.color} />
       <span className="risk-badge" style={{ background: style.bg, color: style.color }}>
         {level} risk
       </span>
 
       <div className="profile-meta">
+        <div className="profile-meta-title">Profile details</div>
         <div className="row">
-          <span>name</span>
+          <span>Name</span>
           <span>{profile?.fullName || "—"}</span>
         </div>
-        <div className="row">
-          <span>workplace</span>
-          <span>{(profile?.workplace || "—").slice(0, 34)}</span>
+        <div className="row profile-workplace">
+          <span>Workplace</span>
+          <span>{profile?.workplace || "—"}</span>
         </div>
         <div className="row">
-          <span>location</span>
+          <span>Location</span>
           <span>{profile?.location || "—"}</span>
         </div>
         <div className="row">
-          <span>connections</span>
+          <span>Connections</span>
           <span>{profile?.connections ?? "—"}</span>
         </div>
         <div className="row">
-          <span>followers</span>
+          <span>Followers</span>
           <span>{profile?.followers ?? "—"}</span>
         </div>
         <div className="row">
-          <span>photo</span>
-          <span>{profile?.hasPhoto ? "yes" : "no"}</span>
+          <span>Profile photo</span>
+          <span>{profile?.hasPhoto ? "Yes" : "No"}</span>
         </div>
         {profile?.datasetLabel !== null && profile?.datasetLabel !== undefined && (
           <div className="row">
-            <span>dataset label</span>
-            <span>{profile.datasetLabel} {profile.datasetLabel === 0 ? "(genuine)" : "(fake)"}</span>
+            <span>Dataset label</span>
+            <span>{profile.datasetLabel === 0 ? "Genuine" : "Fake"}</span>
           </div>
         )}
       </div>
