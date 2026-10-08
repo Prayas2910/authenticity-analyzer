@@ -36,6 +36,32 @@ SUSPICIOUS_KEYWORDS = (
 
 CORPORATE_SUFFIXES = ("inc", "llc", "ltd", "corp", "corporation", "company", "co")
 
+TEXT_FIELDS = (
+    "company_name",
+    "impersonation_target",
+    "modus_operandi",
+    "red_flags",
+    "outreach_vector",
+    "risk_severity",
+)
+
+
+def build_company_text(payload):
+    """Build the company-specific text used by both training and prediction."""
+    labels = {
+        "company_name": "Company",
+        "impersonation_target": "Impersonation target",
+        "modus_operandi": "Reported behavior",
+        "red_flags": "Red flags",
+        "outreach_vector": "Outreach method",
+        "risk_severity": "Risk severity",
+    }
+    return ". ".join(
+        f"{labels[field]}: {str(payload.get(field) or '').strip()}"
+        for field in TEXT_FIELDS
+        if str(payload.get(field) or "").strip()
+    )
+
 
 def extract_features(company_name, url):
     name = str(company_name or "").strip()

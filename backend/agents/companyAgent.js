@@ -28,6 +28,12 @@ function runCompanyModel(company) {
     const inputData = JSON.stringify({
       company_name: company.companyName,
       url: company.url,
+      category: company.category,
+      impersonation_target: company.impersonationTarget,
+      modus_operandi: company.modusOperandi,
+      red_flags: company.redFlags,
+      outreach_vector: company.outreachVector,
+      risk_severity: company.riskSeverity,
     });
     
     // Use write in a callback to ensure it succeeds

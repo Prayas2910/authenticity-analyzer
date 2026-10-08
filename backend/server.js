@@ -2,7 +2,7 @@ const express = require("express");
 const cors = require("cors");
 
 const { loadDataset, searchProfiles, getProfileByIndex, getRandomProfile, datasetSize } = require("./utils/loadDataset");
-const { findCompanyByUrl, searchCompaniesByName } = require("./utils/companyLookup");
+const { findCompanyByUrl, findCompanyByName, searchCompaniesByName } = require("./utils/companyLookup");
 const { runProfileAgent } = require("./agents/profileAgent");
 const { runCompanyModel } = require("./agents/companyAgent");
 const { runOrganizationAgent } = require("./agents/organizationAgent");
@@ -117,32 +117,17 @@ app.post("/api/company/check", (req, res) => {
 app.post("/api/company/analyze", async (req, res) => {
   try {
     const { url, companyName } = req.body || {};
+    let company = url ? findCompanyByUrl(url) : null;
 
-    // If we have companyName from frontend, use searchCompaniesByName to get the exact match
-    let company = null;
-
-    if (companyName && companyName.trim()) {
-      // Search for the company by name
-      const results = searchCompaniesByName(companyName, 5);
-      if (results.length > 0) {
-        // Find exact match in results
-        const targetNorm = results[0].normName; // Use first result's normName
-        company = results.find(c => c.normName === targetNorm) || results[0];
-      }
-
-      // If not found, create a minimal company object with what we have
-      if (!company) {
-        company = {
-          companyName: companyName,
-          url: url || "",
-          source: "frontend",
-          datasetLabel: null,
-          normName: companyName.toLowerCase().trim(),
-          normUrl: null,
-        };
-      }
-    } else if (url) {
-      company = findCompanyByUrl(url);
+    if (!company && !url && companyName && companyName.trim()) {
+      company = findCompanyByName(companyName) || {
+        companyName: companyName.trim(),
+        url: "",
+        source: "frontend",
+        datasetLabel: null,
+        normName: companyName.toLowerCase().trim(),
+        normUrl: null,
+      };
     }
 
     if (!company) return res.status(404).json({ error: "Company not found in backend/data/organisation_dataset.csv" });
